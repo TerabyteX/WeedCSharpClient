@@ -81,24 +81,19 @@ namespace WeedCSharpClient
             return Write(file, location, fileName, null, null, inputToUpload);
         }
 
-        public void Delete(WeedFSFile file, Location location)
+        public void Delete(string url)
         {
-            var url = new StringBuilder();
-            if (!location.publicUrl.Contains("http"))
-            {
-                url.Append("http://");
-            }
-            url.AppendFormat("{0}/{1}", location.publicUrl, file.Fid);
-
-            using (var response = _httpClient.DeleteAsync(url.ToString()))
+            using (var response = _httpClient.DeleteAsync(url))
             {
                 var result = response.Result;
                 var statusCode = result.StatusCode;
 
                 if (statusCode < HttpStatusCode.OK || statusCode > HttpStatusCode.PartialContent)
                 {
+                    var index = url.LastIndexOf('/') + 1;
+                    var fid = url.Substring(index);
                     throw new WeedFSException(string.Format("Error deleting file {0} on {1}: {2} {3}",
-                        file.Fid, location.publicUrl, statusCode, result.ReasonPhrase));
+                        fid, url, statusCode, result.ReasonPhrase));
                 }
             }
         }

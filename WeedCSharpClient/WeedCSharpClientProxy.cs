@@ -57,10 +57,10 @@ namespace WeedCSharpClient
         /// <summary>
         /// delete the file
         /// </summary>
-        /// <param name="fid">fid</param>
-        public void Delete(string fid)
+        /// <param name="url">url</param>
+        public void Delete(string url)
         {
-            //weedCSharpClient.Delete(fid);
+            weedCSharpClient.Delete(url);
         }
 
         /// <summary>

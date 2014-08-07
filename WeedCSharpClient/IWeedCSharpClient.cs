@@ -19,7 +19,7 @@ namespace WeedCSharpClient
 
         WriteResult Write(WeedFSFile file, Location location, Stream inputToUpload, string fileName);
 
-        void Delete(WeedFSFile file, Location location);
+        void Delete(string url);
 
         List<Location> Lookup(long volumeId);
 

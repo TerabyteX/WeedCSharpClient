@@ -51,6 +51,11 @@ namespace WeedCSharpClientTest
             var postResult = HttpHelper.MultipartPost(uploadUrl, bytes, "file", random.Next().ToString(), "application/octet-stream");
             Console.WriteLine("Upload using HttpHelper: {0}{1}{2}{3}", Environment.NewLine, uploadUrl, Environment.NewLine, postResult);
             #endregion
+
+            #region Delete
+            WeedProxy.Delete(uploadUrl);
+            Console.WriteLine(uploadUrl + " has been deleted.");
+            #endregion
         }
 
         private static void UploadLocalFiles()
