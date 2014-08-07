@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeedCSharpClient", "WeedCSharpClient\WeedCSharpClient.csproj", "{5C187C52-2843-470F-93E3-20C7D5A450EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeedCSharpClientTest", "WeedCSharpClientTest\WeedCSharpClientTest.csproj", "{F5CD4E81-6590-4A61-B7EB-5B5A948C1D79}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5C187C52-2843-470F-93E3-20C7D5A450EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C187C52-2843-470F-93E3-20C7D5A450EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C187C52-2843-470F-93E3-20C7D5A450EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C187C52-2843-470F-93E3-20C7D5A450EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5CD4E81-6590-4A61-B7EB-5B5A948C1D79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5CD4E81-6590-4A61-B7EB-5B5A948C1D79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5CD4E81-6590-4A61-B7EB-5B5A948C1D79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5CD4E81-6590-4A61-B7EB-5B5A948C1D79}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
