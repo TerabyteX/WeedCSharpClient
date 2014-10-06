@@ -22,7 +22,7 @@ namespace WeedCSharpClient
         private WeedCSharpClientSubject() { }
         public static readonly WeedCSharpClientSubject Instance = new WeedCSharpClientSubject();
 
-        private readonly WeedCSharpClientImpl weedCSharpClient = new WeedCSharpClientImpl(new Uri(ConfigurationManager.AppSettings["WeedMasterUrl"]));
+        private readonly WeedCSharpClientImpl _weedCSharpClient = new WeedCSharpClientImpl(new Uri(ConfigurationManager.AppSettings["WeedMasterUrl"]));
 
         /// <summary>
         /// store or update the file content with byte array
@@ -35,8 +35,8 @@ namespace WeedCSharpClient
         public WriteResult Upload(byte[] buffer, string fileName = null, string fid = null, 
             ReplicationStrategy replicationStrategy = ReplicationStrategy.None)
         {
-            var assignResult = weedCSharpClient.Assign(new AssignParams(replicationStrategy));
-            return weedCSharpClient.Write(assignResult.WeedFSFile, assignResult.Location, buffer, fileName);
+            var assignResult = _weedCSharpClient.Assign(new AssignParams(replicationStrategy));
+            return _weedCSharpClient.Write(assignResult.WeedFSFile, assignResult.Location, buffer, fileName);
         }
         /// <summary>
         /// store or update the file content with stream
@@ -49,8 +49,8 @@ namespace WeedCSharpClient
         public WriteResult Upload(Stream stream, string fileName = null, string fid = null, 
             ReplicationStrategy replicationStrategy = ReplicationStrategy.None)
         {
-            var assignResult = weedCSharpClient.Assign(new AssignParams(replicationStrategy));
-            return weedCSharpClient.Write(assignResult.WeedFSFile, assignResult.Location, stream, fileName);
+            var assignResult = _weedCSharpClient.Assign(new AssignParams(replicationStrategy));
+            return _weedCSharpClient.Write(assignResult.WeedFSFile, assignResult.Location, stream, fileName);
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace WeedCSharpClient
         /// <param name="url">url</param>
         public void Delete(string url)
         {
-            weedCSharpClient.Delete(url);
+            _weedCSharpClient.Delete(url);
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace WeedCSharpClient
         /// <returns>url</returns>
         public string Lookup(long volumeId)
         {
-            var locations = weedCSharpClient.Lookup(volumeId);
+            var locations = _weedCSharpClient.Lookup(volumeId);
             if (locations.Count > 0)
             {
                 return locations[0].publicUrl;

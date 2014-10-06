@@ -8,12 +8,11 @@
 
         public Location AsLocation()
         {
-            var location = new Location
+            return new Location
                         {
                             publicUrl = PublicUrl,
                             url = Url
                         };
-            return location;
         }
     }
 }

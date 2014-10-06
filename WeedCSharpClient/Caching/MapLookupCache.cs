@@ -35,6 +35,7 @@ namespace WeedCSharpClient.Caching
         {
             List<Location> locations;
             _cache.TryGetValue(volumeId, out locations);
+
             return locations;
         }
 

@@ -32,10 +32,8 @@ namespace WeedCSharpClient
             {
                 return fid;
             }
-            else
-            {
-                throw new FormatException(string.Format("Cannot parse {0} to long", fidStr));
-            }
+
+            throw new FormatException(string.Format("Cannot parse {0} to long", fidStr));
         }
 
         public override string ToString()

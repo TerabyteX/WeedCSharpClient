@@ -18,6 +18,7 @@ namespace WeedCSharpClient.Status
         {
             ReplicationStrategy replication;
             Enum.TryParse(RepType, out replication);
+
             return replication;
         }
     }

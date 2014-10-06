@@ -13,6 +13,7 @@ namespace WeedCSharpClient.Status
         {
             ReplicationStrategy replication;
             Enum.TryParse(Replication, out replication);
+
             return replication;
         }
     }

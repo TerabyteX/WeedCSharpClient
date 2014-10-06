@@ -75,6 +75,7 @@ namespace WeedCSharpClient
             {
                 throw new WeedFSException("Cannot write a 0-length data");
             }
+
             return Write(file, location, fileName, null, dataToUpload);
         }
 
@@ -224,12 +225,10 @@ namespace WeedCSharpClient
             {
                 return "file";
             }
-            else if (fileName.Length > 256)
-            {
-                return fileName.Substring(0, 255);
-            }
 
-            return fileName;
+            return fileName.Length > 256
+                ? fileName.Substring(0, 255)
+                : fileName;
         }
 
         private WriteResult Write(WeedFSFile file, Location location, string fileName = null, FileInfo fileToUpload = null,
