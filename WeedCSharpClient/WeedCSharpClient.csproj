@@ -30,10 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ServiceStack.Text">
+      <HintPath>..\packages\ServiceStack.Text.4.0.31\lib\net40\ServiceStack.Text.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
@@ -42,7 +44,6 @@
     <Compile Include="Caching\ILookupCache.cs" />
     <Compile Include="Caching\MapLookupCache.cs" />
     <Compile Include="Helper\HttpHelper.cs" />
-    <Compile Include="Helper\JsonHelper.cs" />
     <Compile Include="Helper\StreamHelper.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Net\AssignResult.cs" />
@@ -67,7 +68,9 @@
     <Compile Include="WeedFSFile.cs" />
     <Compile Include="WeedFSFileNotFoundException.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

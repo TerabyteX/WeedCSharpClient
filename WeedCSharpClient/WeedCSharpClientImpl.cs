@@ -12,6 +12,8 @@ using WeedCSharpClient.Helper;
 using WeedCSharpClient.Net;
 using WeedCSharpClient.Status;
 
+using ServiceStack.Text;
+
 namespace WeedCSharpClient
 {
     public class WeedCSharpClientImpl : IWeedCSharpClient
@@ -46,8 +48,8 @@ namespace WeedCSharpClient
             using (var response = _httpClient.GetAsync(url.ToString()))
             {
                 var content = response.Result.Content.ReadAsStringAsync().Result;
-                var result = JsonHelper.Deserialize<AssignResult>(content);
-
+                var result = JsonSerializer.DeserializeFromString<AssignResult>(content);
+                
                 if (!string.IsNullOrWhiteSpace(result.error))
                 {
                     throw new WeedFSException(result.error);
@@ -115,7 +117,7 @@ namespace WeedCSharpClient
             using (var response = _httpClient.GetAsync(url.ToString()))
             {
                 var content = response.Result.Content.ReadAsStringAsync().Result;
-                var result = JsonHelper.Deserialize<LookupResult>(content);
+                var result = JsonSerializer.DeserializeFromString<LookupResult>(content);       
 
                 if (!string.IsNullOrWhiteSpace(result.error))
                 {
@@ -186,7 +188,7 @@ namespace WeedCSharpClient
                 }
 
                 var content = result.Content.ReadAsStringAsync().Result;
-                return JsonHelper.Deserialize<MasterStatus>(content);
+                return JsonSerializer.DeserializeFromString<MasterStatus>(content);
             }
         }
 
@@ -210,7 +212,7 @@ namespace WeedCSharpClient
                 }
 
                 var content = result.Content.ReadAsStringAsync().Result;
-                return JsonHelper.Deserialize<VolumeStatus>(content);
+                return JsonSerializer.DeserializeFromString<VolumeStatus>(content);
             }
         }
 
@@ -279,7 +281,7 @@ namespace WeedCSharpClient
             using (var response = _httpClient.PostAsync(fileUrl, multipart))
             {
                 var content = response.Result.Content.ReadAsStringAsync().Result;
-                var result = JsonHelper.Deserialize<WriteResult>(content);
+                var result = JsonSerializer.DeserializeFromString<WriteResult>(content);
                 result.url = fileUrl;
 
                 if (!string.IsNullOrWhiteSpace(result.error))
