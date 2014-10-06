@@ -227,7 +227,7 @@ namespace WeedCSharpClient
             }
 
             return fileName.Length > 256
-                ? fileName.Substring(0, 255)
+                ? fileName.Substring(0, 256)
                 : fileName;
         }
 
