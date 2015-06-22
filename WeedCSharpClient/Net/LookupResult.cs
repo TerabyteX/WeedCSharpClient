@@ -4,6 +4,6 @@ namespace WeedCSharpClient.Net
 {
     public class LookupResult : Result
     {
-        public List<Location> locations;
+        public List<Location> locations { get; set; }
     }
 }

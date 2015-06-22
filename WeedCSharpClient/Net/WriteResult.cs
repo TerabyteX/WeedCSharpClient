@@ -2,7 +2,7 @@
 {
     public class WriteResult : Result
     {
-        public int size;
-        public string url;
+        public int size { get; set; }
+        public string url { get; set; }
     }
 }

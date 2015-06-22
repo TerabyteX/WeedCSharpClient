@@ -2,6 +2,6 @@
 {
     public abstract class Result
     {
-        public string error;
+        public string error { get; set; }
     }
 }

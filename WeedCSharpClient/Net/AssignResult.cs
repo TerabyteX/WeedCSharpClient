@@ -2,10 +2,10 @@
 {
     public class AssignResult : Result
     {
-        public int count;
-        public string fid;
-        public string publicUrl;
-        public string url;
+        public int count { get; set; }
+        public string fid { get; set; }
+        public string publicUrl { get; set; }
+        public string url { get; set; }
 
         public Location GetLocation()
         {
