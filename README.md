@@ -1,7 +1,7 @@
 Weed-CSharp-Client
 ==================
 
-C# client library for the Weed-FS
+C# client library for the SeaweedFS
 
 It needs .NET4 or newer, otherwise you must implement the get and post methods.
 
