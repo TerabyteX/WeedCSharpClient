@@ -63,20 +63,20 @@ namespace WeedCSharpClient.Status
             foreach (var dc in DataCenters)
             {
                 _stats.DcCount += 1;
-                if (dc.Racks == null)
+
+                if (dc.Racks != null)
                 {
-                    continue;
-                }
-                foreach (var rack in dc.Racks)
-                {
-                    _stats.RackCount += 1;
-                    if (rack.DataNodes == null)
+                    foreach (var rack in dc.Racks)
                     {
-                        continue;
+                        _stats.RackCount += 1;
+
+                        if (rack.DataNodes != null)
+                        {
+                            _stats.NodeCount += rack.DataNodes.Count;
+                            _stats.NodeList.AddRange(rack.DataNodes);
+                        }  
                     }
-                    _stats.NodeCount += rack.DataNodes.Count;
-                    _stats.NodeList.AddRange(rack.DataNodes);
-                }
+                }                
             }
         }
 
