@@ -95,21 +95,17 @@ namespace WeedCSharpClient
                 {
                     var index = url.LastIndexOf('/') + 1;
                     var fid = url.Substring(index);
-                    throw new WeedFSException(string.Format("Error deleting file {0} on {1}: {2} {3}",
-                        fid, url, statusCode, result.ReasonPhrase));
+                    throw new WeedFSException($"Error deleting file {fid} on {url}: {statusCode} {result.ReasonPhrase}");
                 }
             }
         }
 
         public List<Location> Lookup(long volumeId)
         {
-            if (LookupCache != null)
+            var locations = LookupCache?.Lookup(volumeId);
+            if (locations != null)
             {
-                List<Location> locations = LookupCache.Lookup(volumeId);
-                if (locations != null)
-                {
-                    return locations;
-                }
+                return locations;
             }
 
             var url = new StringBuilder(new Uri(_masterUri, "/dir/lookup").AbsoluteUri);
@@ -125,10 +121,7 @@ namespace WeedCSharpClient
                     throw new WeedFSException(result.error);
                 }
 
-                if (LookupCache != null)
-                {
-                    LookupCache.SetLocation(volumeId, result.locations);
-                }
+                LookupCache?.SetLocation(volumeId, result.locations);
 
                 return result.locations;
             }
@@ -166,8 +159,7 @@ namespace WeedCSharpClient
                     if (!response.IsCanceled)
                         cts.Cancel();
 
-                    throw new WeedFSException(string.Format("Error reading file {0} on {1}: {2} {3}",
-                        file.Fid, location.publicUrl, statusCode, result.ReasonPhrase));
+                    throw new WeedFSException($"Error reading file {file.Fid} on {location.publicUrl}: {statusCode} {result.ReasonPhrase}");
                 }
 
                 return response.Result.Content.ReadAsStreamAsync().Result;

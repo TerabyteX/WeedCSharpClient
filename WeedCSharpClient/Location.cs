@@ -7,7 +7,7 @@
 
         public override string ToString()
         {
-            return string.Format("Location [publicUrl={0}, url={1}]", publicUrl, url);
+            return $"Location [publicUrl={publicUrl}, url={url}]";
         }
     }
 }

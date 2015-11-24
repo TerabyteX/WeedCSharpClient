@@ -76,7 +76,7 @@ namespace WeedCSharpClient
             }
             else
             {
-                throw new ArgumentException("There is no location", "locations");
+                throw new ArgumentException("There is no location", nameof(locations));
             }
         }
     }

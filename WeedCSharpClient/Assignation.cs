@@ -19,8 +19,7 @@ namespace WeedCSharpClient
 
         public override string ToString()
         {
-            return string.Format("AssignedWeedFSFile [weedFSFile={0}, location={1}, versionCount={2}]",
-                WeedFSFile, Location, _versionCount);
+            return $"AssignedWeedFSFile [weedFSFile={WeedFSFile}, location={Location}, versionCount={_versionCount}]";
         }
     }
 }

@@ -23,13 +23,13 @@ namespace WeedCSharpClientTest
         private static void UploadTmpFiles()
         {
             var upper = random.Next(100) + 1;
-            for (int i = 0; i < upper; i++)
+            for (var i = 0; i < upper; i++)
             {
                 var buffer = new byte[random.Next(100) + 50];
                 random.NextBytes(buffer);
 
                 #region Upload
-                var result = WeedProxy.Upload(buffer, "file" + i.ToString());
+                var result = WeedProxy.Upload(buffer, "file" + i);
                 Console.WriteLine(result.url);
                 #endregion
 
@@ -38,7 +38,7 @@ namespace WeedCSharpClientTest
                 var fid = result.url.Substring(index);
                 var vid = long.Parse(fid.Split(',')[0]);
                 var location = WeedProxy.Lookup(vid);
-                Console.WriteLine(string.Format("http://{0}{1}{2}", location, "/", fid));
+                Console.WriteLine($"http://{location}/{fid}");
                 #endregion
             }
 
@@ -47,9 +47,9 @@ namespace WeedCSharpClientTest
             random.NextBytes(bytes);
             var uri = new Uri(ConfigurationManager.AppSettings["WeedMasterUrl"]);
             var assignation = new WeedCSharpClientImpl(uri).Assign(new AssignParams());
-            var uploadUrl = string.Format("http://{0}/{1}", assignation.Location.publicUrl, assignation.WeedFSFile.Fid);
+            var uploadUrl = $"http://{assignation.Location.publicUrl}/{assignation.WeedFSFile.Fid}";
             var postResult = HttpHelper.MultipartPost(uploadUrl, bytes, "file", random.Next().ToString(), "application/octet-stream");
-            Console.WriteLine("Upload using HttpHelper: {0}{1}{2}{3}", Environment.NewLine, uploadUrl, Environment.NewLine, postResult);
+            Console.WriteLine($"Upload using HttpHelper: {Environment.NewLine}{uploadUrl}{Environment.NewLine}{postResult}");
             #endregion
 
             #region Delete
@@ -77,7 +77,7 @@ namespace WeedCSharpClientTest
                 var fid = result.url.Substring(index);
                 var vid = long.Parse(fid.Split(',')[0]);
                 var location = WeedProxy.Lookup(vid);
-                Console.WriteLine(string.Format("http://{0}{1}{2}", location, "/", fid));
+                Console.WriteLine($"http://{location}/{fid}");
                 #endregion
             }
         }

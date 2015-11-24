@@ -16,13 +16,13 @@ namespace WeedCSharpClient
         {
             if (string.IsNullOrEmpty(Fid))
             {
-                throw new ArgumentException("Fid cannot be empty", "Fid");
+                throw new ArgumentException("Fid cannot be empty", nameof(Fid));
             }
 
-            int pos = Fid.IndexOf(',');
+            var pos = Fid.IndexOf(',');
             if (pos == -1)
-            {
-                throw new ArgumentException("Cannot parse fid: " + Fid, "Fid");
+            {  
+                throw new ArgumentException("Cannot parse fid: " + Fid, nameof(Fid));
             }
 
             var fidStr = Fid.Substring(0, pos);
@@ -33,12 +33,12 @@ namespace WeedCSharpClient
                 return fid;
             }
 
-            throw new FormatException(string.Format("Cannot parse {0} to long", fidStr));
+            throw new FormatException($"Cannot parse {fidStr} to long");
         }
 
         public override string ToString()
         {
-            return string.Format("WeedFSFile [fid={0}, version={1}]", Fid, Version);
+            return $"WeedFSFile [fid={Fid}, version={Version}]";
         }
     }
 }

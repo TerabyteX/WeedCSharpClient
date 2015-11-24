@@ -24,8 +24,7 @@ namespace WeedCSharpClient.Helper
             var requestStream = httpWebRequest.GetRequestStream();
             requestStream.Write(bytes, 0, bytes.Length);
 
-            var format = "Content-Disposition: form-data; name=\"{0}\"; filename=\"{1}\"\r\nContent-Type: {2}\r\n\r\n";
-            var fileInfo = string.Format(format, name, fileName, contentType);
+            var fileInfo = $"Content-Disposition: form-data; name=\"{name}\"; filename=\"{fileName}\"\r\nContent-Type: {contentType}\r\n\r\n"; ;
 
             var fileInfoBuffer = Encoding.UTF8.GetBytes(fileInfo);
             requestStream.Write(fileInfoBuffer, 0, fileInfoBuffer.Length);
@@ -36,9 +35,6 @@ namespace WeedCSharpClient.Helper
             requestStream.Close();
 
             WebResponse webResponse = null;
-            StreamReader streamReader = null;
-            string result = null;
-
             try
             {
                 if (async)
@@ -51,23 +47,15 @@ namespace WeedCSharpClient.Helper
                     webResponse = httpWebRequest.GetResponse();
                 }
 
-                streamReader = new StreamReader(webResponse.GetResponseStream());
-                result = streamReader.ReadToEnd();
+                using (var streamReader = new StreamReader(webResponse.GetResponseStream()))
+                {
+                    return streamReader.ReadToEnd();
+                }
             }
             finally 
             {
-                if (streamReader != null)
-                {
-                    streamReader.Close();
-                }
-
-                if (webResponse != null)
-                {
-                    webResponse.Close();
-                }
-            }
-
-            return result;
+                webResponse?.Close();
+            }          
         }
     }
 }
