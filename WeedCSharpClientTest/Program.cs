@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.IO;
+using static System.Console;
 
 using WeedCSharpClient;
 using WeedCSharpClient.Helper;
@@ -14,10 +15,10 @@ namespace WeedCSharpClientTest
 
         static void Main(string[] args)
         {
-            Console.WriteLine("start...");
+            WriteLine("start...");
             UploadTmpFiles();
             //UploadLocalFiles();
-            Console.WriteLine("finish...");
+            WriteLine("finish...");
         }
 
         private static void UploadTmpFiles()
@@ -30,7 +31,7 @@ namespace WeedCSharpClientTest
 
                 #region Upload
                 var result = WeedProxy.Upload(buffer, "file" + i);
-                Console.WriteLine(result.url);
+                WriteLine(result.url);
                 #endregion
 
                 #region Lookup
@@ -38,7 +39,7 @@ namespace WeedCSharpClientTest
                 var fid = result.url.Substring(index);
                 var vid = long.Parse(fid.Split(',')[0]);
                 var location = WeedProxy.Lookup(vid);
-                Console.WriteLine($"http://{location}/{fid}");
+                WriteLine($"http://{location}/{fid}");
                 #endregion
             }
 
@@ -49,12 +50,12 @@ namespace WeedCSharpClientTest
             var assignation = new WeedCSharpClientImpl(uri).Assign(new AssignParams());
             var uploadUrl = $"http://{assignation.Location.publicUrl}/{assignation.WeedFSFile.Fid}";
             var postResult = HttpHelper.MultipartPost(uploadUrl, bytes, "file", random.Next().ToString(), "application/octet-stream");
-            Console.WriteLine($"Upload using HttpHelper: {Environment.NewLine}{uploadUrl}{Environment.NewLine}{postResult}");
+            WriteLine($"Upload using HttpHelper: {Environment.NewLine}{uploadUrl}{Environment.NewLine}{postResult}");
             #endregion
 
             #region Delete
             WeedProxy.Delete(uploadUrl);
-            Console.WriteLine(uploadUrl + " has been deleted.");
+            WriteLine(uploadUrl + " has been deleted.");
             #endregion
         }
 
@@ -69,7 +70,7 @@ namespace WeedCSharpClientTest
                 var stream = fileInfo.OpenRead();
                 //var buffer = StreamHelper.StreamToBytes(stream);
                 var result = WeedProxy.Upload(stream, fileName);
-                Console.WriteLine(result.url);
+                WriteLine(result.url);
                 #endregion
 
                 #region Lookup
@@ -77,7 +78,7 @@ namespace WeedCSharpClientTest
                 var fid = result.url.Substring(index);
                 var vid = long.Parse(fid.Split(',')[0]);
                 var location = WeedProxy.Lookup(vid);
-                Console.WriteLine($"http://{location}/{fid}");
+                WriteLine($"http://{location}/{fid}");
                 #endregion
             }
         }
